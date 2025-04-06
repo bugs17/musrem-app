@@ -1,3 +1,4 @@
+"use client"
 import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
 
 import {
@@ -6,9 +7,12 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarRail,
+  useSidebar,
 } from "@/components/ui/sidebar"
 
 // Menu items.
@@ -41,11 +45,18 @@ const items = [
 ]
 
 export function AppSidebar() {
+  const {state} = useSidebar()
   return (
-    <Sidebar>
+    <Sidebar collapsible="icon">
+    <SidebarHeader className="bg-[#08080a] text-slate-200 border-b border-grid flex flex-row justify-center items-center h-12">
+    <span className="w-8 h-8 flex items-center justify-center text-[20px] bg-white font-extrabold hover:-rotate-[35deg] hover:bg-violet-500 cursor-pointer text-black rounded-full">
+      M
+    </span>
+      <h3 className={state === 'collapsed' ? "hidden" : "text-white font-bold cursor-pointer"}>musrembang</h3>
+    </SidebarHeader>
       <SidebarContent className="bg-[#08080a] text-slate-200 border-r border-grid">
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-slate-200">Application</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
@@ -61,6 +72,7 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+        
       </SidebarContent>
     </Sidebar>
   )
