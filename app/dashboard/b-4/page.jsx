@@ -1,5 +1,6 @@
 import {  columns } from "./columns"
 import { DataTable } from "./data-table"
+import TableComponent from "./table-component"
 
 async function getData(){
   // Fetch data from your API here.
@@ -37,7 +38,8 @@ export default async function DemoPage() {
 
   return (
     <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={data} />
+      {/* <DataTable columns={columns} data={data} /> */}
+      <TableComponent />
     </div>
   )
 }
