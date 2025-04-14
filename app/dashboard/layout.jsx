@@ -18,7 +18,7 @@ const DashboardLayout = ({children}) => {
             </div>
 
         </div>
-        <div className='px-4 h-screen w-full overflow-y-auto'>
+        <div className='px-4 max-h-screen w-full overflow-y-auto'>
             {children}
         </div>
       </main>

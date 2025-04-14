@@ -26,29 +26,11 @@ import Image from "next/image"
 // Menu items.
 const items = [
   {
-    title: "Form",
+    title: "Mindiptanah",
     icon: BookCopy,
     submenus : [
       {
-        title: "B-4",
-        url:"#"
-      },
-      {
-        title: "B-5",
-        url:"#"
-      }
-    ]
-  },
-  {
-    title: "Form2",
-    icon: BookCopy,
-    submenus : [
-      {
-        title: "B-6",
-        url:"#"
-      },
-      {
-        title: "B-7",
+        title: "2026",
         url:"#"
       }
     ]
@@ -70,7 +52,7 @@ export function AppSidebar() {
     </SidebarHeader>
       <SidebarContent className="bg-[#08080a] text-slate-200 border-r border-grid">
         <SidebarGroup>
-          <SidebarGroupLabel className="text-slate-200">Menu</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-slate-200">Distrik</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (

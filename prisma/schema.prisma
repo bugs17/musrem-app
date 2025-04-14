@@ -1,0 +1,135 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+
+model User{
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  username String
+  password String
+  role String
+
+  distrikId  Int? @unique
+  distrik    Distrik?  @relation(fields: [distrikId], references: [id])
+
+  tahunAnggaran Ta[]
+}
+
+model Ta{
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tahun Int
+
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Opd{
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  namaOpd String
+  urusan String
+  kodeUrusan String @unique
+
+  kegiatan Kegiatan[]
+}
+
+model Kegiatan{
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  namaKegiatan String
+  kodeKegiatan String @unique
+
+  opdId Int
+  opd Opd @relation(fields: [opdId], references: [id])
+
+  subkegiatan SubKegiatan[]
+}
+
+
+model SubKegiatan{
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  namaSubKegiatan String
+  kodeSubKegiatan String @unique
+
+  kegiatanId Int
+  kegiatan Kegiatan @relation(fields: [kegiatanId], references: [id])
+
+  usulan Usulan[]
+}
+
+model Usulan{
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  namaUsulan String
+
+  volume String?
+  satuan Satuan[]
+  distrik Distrik?
+  
+  kampungId Int
+  kampung Kampung @relation(fields: [kampungId], references: [id])
+
+  subkegiatanId Int
+  subkegiatan SubKegiatan @relation(fields: [subkegiatanId], references: [id])
+}
+
+model Satuan{
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  namaSatuan String
+  usulanId Int
+  usulan Usulan @relation(fields: [usulanId], references: [id])
+}
+
+
+model Distrik{
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  namaDistrik String
+  usulanId Int? @unique
+  usulan Usulan? @relation(fields: [usulanId], references: [id])
+
+  user User?
+
+  kampung Kampung[]
+}
+
+model Kampung{
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  namaKampung String
+
+  distrikId Int
+  distrik Distrik @relation(fields: [distrikId], references: [id])
+
+  usulan Usulan[]
+}

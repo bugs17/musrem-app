@@ -1,5 +1,4 @@
-import {  columns } from "./columns"
-import { DataTable } from "./data-table"
+
 import TableComponent from "./table-component"
 
 async function getData(){
@@ -37,9 +36,10 @@ export default async function DemoPage() {
   const data = await getData()
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-6">
       {/* <DataTable columns={columns} data={data} /> */}
       <TableComponent />
+      <span className="text-neutral-500 absolute bottom-1 right-4 z-40 text-[10px]">V.1.0.0</span>
     </div>
   )
 }
