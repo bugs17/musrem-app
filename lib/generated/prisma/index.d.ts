@@ -29,6 +29,11 @@ export type Ta = $Result.DefaultSelection<Prisma.$TaPayload>
  */
 export type Opd = $Result.DefaultSelection<Prisma.$OpdPayload>
 /**
+ * Model Desk
+ * 
+ */
+export type Desk = $Result.DefaultSelection<Prisma.$DeskPayload>
+/**
  * Model Kegiatan
  * 
  */
@@ -213,6 +218,16 @@ export class PrismaClient<
     * ```
     */
   get opd(): Prisma.OpdDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.desk`: Exposes CRUD operations for the **Desk** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Desks
+    * const desks = await prisma.desk.findMany()
+    * ```
+    */
+  get desk(): Prisma.DeskDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.kegiatan`: Exposes CRUD operations for the **Kegiatan** model.
@@ -716,6 +731,7 @@ export namespace Prisma {
     User: 'User',
     Ta: 'Ta',
     Opd: 'Opd',
+    Desk: 'Desk',
     Kegiatan: 'Kegiatan',
     SubKegiatan: 'SubKegiatan',
     Usulan: 'Usulan',
@@ -740,7 +756,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "ta" | "opd" | "kegiatan" | "subKegiatan" | "usulan" | "satuan" | "distrik" | "kampung"
+      modelProps: "user" | "ta" | "opd" | "desk" | "kegiatan" | "subKegiatan" | "usulan" | "satuan" | "distrik" | "kampung"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -963,6 +979,80 @@ export namespace Prisma {
           count: {
             args: Prisma.OpdCountArgs<ExtArgs>
             result: $Utils.Optional<OpdCountAggregateOutputType> | number
+          }
+        }
+      }
+      Desk: {
+        payload: Prisma.$DeskPayload<ExtArgs>
+        fields: Prisma.DeskFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DeskFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DeskFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload>
+          }
+          findFirst: {
+            args: Prisma.DeskFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DeskFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload>
+          }
+          findMany: {
+            args: Prisma.DeskFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload>[]
+          }
+          create: {
+            args: Prisma.DeskCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload>
+          }
+          createMany: {
+            args: Prisma.DeskCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DeskCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload>[]
+          }
+          delete: {
+            args: Prisma.DeskDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload>
+          }
+          update: {
+            args: Prisma.DeskUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload>
+          }
+          deleteMany: {
+            args: Prisma.DeskDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DeskUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DeskUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload>[]
+          }
+          upsert: {
+            args: Prisma.DeskUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload>
+          }
+          aggregate: {
+            args: Prisma.DeskAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDesk>
+          }
+          groupBy: {
+            args: Prisma.DeskGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DeskGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DeskCountArgs<ExtArgs>
+            result: $Utils.Optional<DeskCountAggregateOutputType> | number
           }
         }
       }
@@ -1497,6 +1587,7 @@ export namespace Prisma {
     user?: UserOmit
     ta?: TaOmit
     opd?: OpdOmit
+    desk?: DeskOmit
     kegiatan?: KegiatanOmit
     subKegiatan?: SubKegiatanOmit
     usulan?: UsulanOmit
@@ -1651,6 +1742,37 @@ export namespace Prisma {
    */
   export type OpdCountOutputTypeCountKegiatanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: KegiatanWhereInput
+  }
+
+
+  /**
+   * Count Type DeskCountOutputType
+   */
+
+  export type DeskCountOutputType = {
+    opd: number
+  }
+
+  export type DeskCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    opd?: boolean | DeskCountOutputTypeCountOpdArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * DeskCountOutputType without action
+   */
+  export type DeskCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeskCountOutputType
+     */
+    select?: DeskCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * DeskCountOutputType without action
+   */
+  export type DeskCountOutputTypeCountOpdArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OpdWhereInput
   }
 
 
@@ -4094,10 +4216,12 @@ export namespace Prisma {
 
   export type OpdAvgAggregateOutputType = {
     id: number | null
+    deskId: number | null
   }
 
   export type OpdSumAggregateOutputType = {
     id: number | null
+    deskId: number | null
   }
 
   export type OpdMinAggregateOutputType = {
@@ -4107,6 +4231,7 @@ export namespace Prisma {
     namaOpd: string | null
     urusan: string | null
     kodeUrusan: string | null
+    deskId: number | null
   }
 
   export type OpdMaxAggregateOutputType = {
@@ -4116,6 +4241,7 @@ export namespace Prisma {
     namaOpd: string | null
     urusan: string | null
     kodeUrusan: string | null
+    deskId: number | null
   }
 
   export type OpdCountAggregateOutputType = {
@@ -4125,16 +4251,19 @@ export namespace Prisma {
     namaOpd: number
     urusan: number
     kodeUrusan: number
+    deskId: number
     _all: number
   }
 
 
   export type OpdAvgAggregateInputType = {
     id?: true
+    deskId?: true
   }
 
   export type OpdSumAggregateInputType = {
     id?: true
+    deskId?: true
   }
 
   export type OpdMinAggregateInputType = {
@@ -4144,6 +4273,7 @@ export namespace Prisma {
     namaOpd?: true
     urusan?: true
     kodeUrusan?: true
+    deskId?: true
   }
 
   export type OpdMaxAggregateInputType = {
@@ -4153,6 +4283,7 @@ export namespace Prisma {
     namaOpd?: true
     urusan?: true
     kodeUrusan?: true
+    deskId?: true
   }
 
   export type OpdCountAggregateInputType = {
@@ -4162,6 +4293,7 @@ export namespace Prisma {
     namaOpd?: true
     urusan?: true
     kodeUrusan?: true
+    deskId?: true
     _all?: true
   }
 
@@ -4258,6 +4390,7 @@ export namespace Prisma {
     namaOpd: string
     urusan: string
     kodeUrusan: string
+    deskId: number
     _count: OpdCountAggregateOutputType | null
     _avg: OpdAvgAggregateOutputType | null
     _sum: OpdSumAggregateOutputType | null
@@ -4286,7 +4419,9 @@ export namespace Prisma {
     namaOpd?: boolean
     urusan?: boolean
     kodeUrusan?: boolean
+    deskId?: boolean
     kegiatan?: boolean | Opd$kegiatanArgs<ExtArgs>
+    desk?: boolean | DeskDefaultArgs<ExtArgs>
     _count?: boolean | OpdCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["opd"]>
 
@@ -4297,6 +4432,8 @@ export namespace Prisma {
     namaOpd?: boolean
     urusan?: boolean
     kodeUrusan?: boolean
+    deskId?: boolean
+    desk?: boolean | DeskDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["opd"]>
 
   export type OpdSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4306,6 +4443,8 @@ export namespace Prisma {
     namaOpd?: boolean
     urusan?: boolean
     kodeUrusan?: boolean
+    deskId?: boolean
+    desk?: boolean | DeskDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["opd"]>
 
   export type OpdSelectScalar = {
@@ -4315,20 +4454,27 @@ export namespace Prisma {
     namaOpd?: boolean
     urusan?: boolean
     kodeUrusan?: boolean
+    deskId?: boolean
   }
 
-  export type OpdOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "namaOpd" | "urusan" | "kodeUrusan", ExtArgs["result"]["opd"]>
+  export type OpdOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "namaOpd" | "urusan" | "kodeUrusan" | "deskId", ExtArgs["result"]["opd"]>
   export type OpdInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     kegiatan?: boolean | Opd$kegiatanArgs<ExtArgs>
+    desk?: boolean | DeskDefaultArgs<ExtArgs>
     _count?: boolean | OpdCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type OpdIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type OpdIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type OpdIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    desk?: boolean | DeskDefaultArgs<ExtArgs>
+  }
+  export type OpdIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    desk?: boolean | DeskDefaultArgs<ExtArgs>
+  }
 
   export type $OpdPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Opd"
     objects: {
       kegiatan: Prisma.$KegiatanPayload<ExtArgs>[]
+      desk: Prisma.$DeskPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -4337,6 +4483,7 @@ export namespace Prisma {
       namaOpd: string
       urusan: string
       kodeUrusan: string
+      deskId: number
     }, ExtArgs["result"]["opd"]>
     composites: {}
   }
@@ -4732,6 +4879,7 @@ export namespace Prisma {
   export interface Prisma__OpdClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     kegiatan<T extends Opd$kegiatanArgs<ExtArgs> = {}>(args?: Subset<T, Opd$kegiatanArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KegiatanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    desk<T extends DeskDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DeskDefaultArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4767,6 +4915,7 @@ export namespace Prisma {
     readonly namaOpd: FieldRef<"Opd", 'String'>
     readonly urusan: FieldRef<"Opd", 'String'>
     readonly kodeUrusan: FieldRef<"Opd", 'String'>
+    readonly deskId: FieldRef<"Opd", 'Int'>
   }
     
 
@@ -5014,6 +5163,10 @@ export namespace Prisma {
      * The data used to create many Opds.
      */
     data: OpdCreateManyInput | OpdCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OpdIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -5084,6 +5237,10 @@ export namespace Prisma {
      * Limit how many Opds to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OpdIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -5192,6 +5349,1095 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: OpdInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Desk
+   */
+
+  export type AggregateDesk = {
+    _count: DeskCountAggregateOutputType | null
+    _avg: DeskAvgAggregateOutputType | null
+    _sum: DeskSumAggregateOutputType | null
+    _min: DeskMinAggregateOutputType | null
+    _max: DeskMaxAggregateOutputType | null
+  }
+
+  export type DeskAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type DeskSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type DeskMinAggregateOutputType = {
+    id: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    namaDesk: string | null
+  }
+
+  export type DeskMaxAggregateOutputType = {
+    id: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    namaDesk: string | null
+  }
+
+  export type DeskCountAggregateOutputType = {
+    id: number
+    createdAt: number
+    updatedAt: number
+    namaDesk: number
+    _all: number
+  }
+
+
+  export type DeskAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type DeskSumAggregateInputType = {
+    id?: true
+  }
+
+  export type DeskMinAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    namaDesk?: true
+  }
+
+  export type DeskMaxAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    namaDesk?: true
+  }
+
+  export type DeskCountAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    namaDesk?: true
+    _all?: true
+  }
+
+  export type DeskAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Desk to aggregate.
+     */
+    where?: DeskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Desks to fetch.
+     */
+    orderBy?: DeskOrderByWithRelationInput | DeskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DeskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Desks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Desks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Desks
+    **/
+    _count?: true | DeskCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DeskAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DeskSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DeskMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DeskMaxAggregateInputType
+  }
+
+  export type GetDeskAggregateType<T extends DeskAggregateArgs> = {
+        [P in keyof T & keyof AggregateDesk]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDesk[P]>
+      : GetScalarType<T[P], AggregateDesk[P]>
+  }
+
+
+
+
+  export type DeskGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DeskWhereInput
+    orderBy?: DeskOrderByWithAggregationInput | DeskOrderByWithAggregationInput[]
+    by: DeskScalarFieldEnum[] | DeskScalarFieldEnum
+    having?: DeskScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DeskCountAggregateInputType | true
+    _avg?: DeskAvgAggregateInputType
+    _sum?: DeskSumAggregateInputType
+    _min?: DeskMinAggregateInputType
+    _max?: DeskMaxAggregateInputType
+  }
+
+  export type DeskGroupByOutputType = {
+    id: number
+    createdAt: Date
+    updatedAt: Date
+    namaDesk: string
+    _count: DeskCountAggregateOutputType | null
+    _avg: DeskAvgAggregateOutputType | null
+    _sum: DeskSumAggregateOutputType | null
+    _min: DeskMinAggregateOutputType | null
+    _max: DeskMaxAggregateOutputType | null
+  }
+
+  type GetDeskGroupByPayload<T extends DeskGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DeskGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DeskGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DeskGroupByOutputType[P]>
+            : GetScalarType<T[P], DeskGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DeskSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    namaDesk?: boolean
+    opd?: boolean | Desk$opdArgs<ExtArgs>
+    _count?: boolean | DeskCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["desk"]>
+
+  export type DeskSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    namaDesk?: boolean
+  }, ExtArgs["result"]["desk"]>
+
+  export type DeskSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    namaDesk?: boolean
+  }, ExtArgs["result"]["desk"]>
+
+  export type DeskSelectScalar = {
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    namaDesk?: boolean
+  }
+
+  export type DeskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "namaDesk", ExtArgs["result"]["desk"]>
+  export type DeskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    opd?: boolean | Desk$opdArgs<ExtArgs>
+    _count?: boolean | DeskCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type DeskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type DeskIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $DeskPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Desk"
+    objects: {
+      opd: Prisma.$OpdPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      createdAt: Date
+      updatedAt: Date
+      namaDesk: string
+    }, ExtArgs["result"]["desk"]>
+    composites: {}
+  }
+
+  type DeskGetPayload<S extends boolean | null | undefined | DeskDefaultArgs> = $Result.GetResult<Prisma.$DeskPayload, S>
+
+  type DeskCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DeskFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DeskCountAggregateInputType | true
+    }
+
+  export interface DeskDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Desk'], meta: { name: 'Desk' } }
+    /**
+     * Find zero or one Desk that matches the filter.
+     * @param {DeskFindUniqueArgs} args - Arguments to find a Desk
+     * @example
+     * // Get one Desk
+     * const desk = await prisma.desk.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DeskFindUniqueArgs>(args: SelectSubset<T, DeskFindUniqueArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Desk that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DeskFindUniqueOrThrowArgs} args - Arguments to find a Desk
+     * @example
+     * // Get one Desk
+     * const desk = await prisma.desk.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DeskFindUniqueOrThrowArgs>(args: SelectSubset<T, DeskFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Desk that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeskFindFirstArgs} args - Arguments to find a Desk
+     * @example
+     * // Get one Desk
+     * const desk = await prisma.desk.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DeskFindFirstArgs>(args?: SelectSubset<T, DeskFindFirstArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Desk that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeskFindFirstOrThrowArgs} args - Arguments to find a Desk
+     * @example
+     * // Get one Desk
+     * const desk = await prisma.desk.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DeskFindFirstOrThrowArgs>(args?: SelectSubset<T, DeskFindFirstOrThrowArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Desks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeskFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Desks
+     * const desks = await prisma.desk.findMany()
+     * 
+     * // Get first 10 Desks
+     * const desks = await prisma.desk.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const deskWithIdOnly = await prisma.desk.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DeskFindManyArgs>(args?: SelectSubset<T, DeskFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Desk.
+     * @param {DeskCreateArgs} args - Arguments to create a Desk.
+     * @example
+     * // Create one Desk
+     * const Desk = await prisma.desk.create({
+     *   data: {
+     *     // ... data to create a Desk
+     *   }
+     * })
+     * 
+     */
+    create<T extends DeskCreateArgs>(args: SelectSubset<T, DeskCreateArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Desks.
+     * @param {DeskCreateManyArgs} args - Arguments to create many Desks.
+     * @example
+     * // Create many Desks
+     * const desk = await prisma.desk.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DeskCreateManyArgs>(args?: SelectSubset<T, DeskCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Desks and returns the data saved in the database.
+     * @param {DeskCreateManyAndReturnArgs} args - Arguments to create many Desks.
+     * @example
+     * // Create many Desks
+     * const desk = await prisma.desk.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Desks and only return the `id`
+     * const deskWithIdOnly = await prisma.desk.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DeskCreateManyAndReturnArgs>(args?: SelectSubset<T, DeskCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Desk.
+     * @param {DeskDeleteArgs} args - Arguments to delete one Desk.
+     * @example
+     * // Delete one Desk
+     * const Desk = await prisma.desk.delete({
+     *   where: {
+     *     // ... filter to delete one Desk
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DeskDeleteArgs>(args: SelectSubset<T, DeskDeleteArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Desk.
+     * @param {DeskUpdateArgs} args - Arguments to update one Desk.
+     * @example
+     * // Update one Desk
+     * const desk = await prisma.desk.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DeskUpdateArgs>(args: SelectSubset<T, DeskUpdateArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Desks.
+     * @param {DeskDeleteManyArgs} args - Arguments to filter Desks to delete.
+     * @example
+     * // Delete a few Desks
+     * const { count } = await prisma.desk.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DeskDeleteManyArgs>(args?: SelectSubset<T, DeskDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Desks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeskUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Desks
+     * const desk = await prisma.desk.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DeskUpdateManyArgs>(args: SelectSubset<T, DeskUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Desks and returns the data updated in the database.
+     * @param {DeskUpdateManyAndReturnArgs} args - Arguments to update many Desks.
+     * @example
+     * // Update many Desks
+     * const desk = await prisma.desk.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Desks and only return the `id`
+     * const deskWithIdOnly = await prisma.desk.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DeskUpdateManyAndReturnArgs>(args: SelectSubset<T, DeskUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Desk.
+     * @param {DeskUpsertArgs} args - Arguments to update or create a Desk.
+     * @example
+     * // Update or create a Desk
+     * const desk = await prisma.desk.upsert({
+     *   create: {
+     *     // ... data to create a Desk
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Desk we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DeskUpsertArgs>(args: SelectSubset<T, DeskUpsertArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Desks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeskCountArgs} args - Arguments to filter Desks to count.
+     * @example
+     * // Count the number of Desks
+     * const count = await prisma.desk.count({
+     *   where: {
+     *     // ... the filter for the Desks we want to count
+     *   }
+     * })
+    **/
+    count<T extends DeskCountArgs>(
+      args?: Subset<T, DeskCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DeskCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Desk.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeskAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DeskAggregateArgs>(args: Subset<T, DeskAggregateArgs>): Prisma.PrismaPromise<GetDeskAggregateType<T>>
+
+    /**
+     * Group by Desk.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeskGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DeskGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DeskGroupByArgs['orderBy'] }
+        : { orderBy?: DeskGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DeskGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDeskGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Desk model
+   */
+  readonly fields: DeskFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Desk.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DeskClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    opd<T extends Desk$opdArgs<ExtArgs> = {}>(args?: Subset<T, Desk$opdArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OpdPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Desk model
+   */
+  interface DeskFieldRefs {
+    readonly id: FieldRef<"Desk", 'Int'>
+    readonly createdAt: FieldRef<"Desk", 'DateTime'>
+    readonly updatedAt: FieldRef<"Desk", 'DateTime'>
+    readonly namaDesk: FieldRef<"Desk", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Desk findUnique
+   */
+  export type DeskFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Desk
+     */
+    omit?: DeskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+    /**
+     * Filter, which Desk to fetch.
+     */
+    where: DeskWhereUniqueInput
+  }
+
+  /**
+   * Desk findUniqueOrThrow
+   */
+  export type DeskFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Desk
+     */
+    omit?: DeskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+    /**
+     * Filter, which Desk to fetch.
+     */
+    where: DeskWhereUniqueInput
+  }
+
+  /**
+   * Desk findFirst
+   */
+  export type DeskFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Desk
+     */
+    omit?: DeskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+    /**
+     * Filter, which Desk to fetch.
+     */
+    where?: DeskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Desks to fetch.
+     */
+    orderBy?: DeskOrderByWithRelationInput | DeskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Desks.
+     */
+    cursor?: DeskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Desks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Desks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Desks.
+     */
+    distinct?: DeskScalarFieldEnum | DeskScalarFieldEnum[]
+  }
+
+  /**
+   * Desk findFirstOrThrow
+   */
+  export type DeskFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Desk
+     */
+    omit?: DeskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+    /**
+     * Filter, which Desk to fetch.
+     */
+    where?: DeskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Desks to fetch.
+     */
+    orderBy?: DeskOrderByWithRelationInput | DeskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Desks.
+     */
+    cursor?: DeskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Desks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Desks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Desks.
+     */
+    distinct?: DeskScalarFieldEnum | DeskScalarFieldEnum[]
+  }
+
+  /**
+   * Desk findMany
+   */
+  export type DeskFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Desk
+     */
+    omit?: DeskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+    /**
+     * Filter, which Desks to fetch.
+     */
+    where?: DeskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Desks to fetch.
+     */
+    orderBy?: DeskOrderByWithRelationInput | DeskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Desks.
+     */
+    cursor?: DeskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Desks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Desks.
+     */
+    skip?: number
+    distinct?: DeskScalarFieldEnum | DeskScalarFieldEnum[]
+  }
+
+  /**
+   * Desk create
+   */
+  export type DeskCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Desk
+     */
+    omit?: DeskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Desk.
+     */
+    data: XOR<DeskCreateInput, DeskUncheckedCreateInput>
+  }
+
+  /**
+   * Desk createMany
+   */
+  export type DeskCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Desks.
+     */
+    data: DeskCreateManyInput | DeskCreateManyInput[]
+  }
+
+  /**
+   * Desk createManyAndReturn
+   */
+  export type DeskCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Desk
+     */
+    omit?: DeskOmit<ExtArgs> | null
+    /**
+     * The data used to create many Desks.
+     */
+    data: DeskCreateManyInput | DeskCreateManyInput[]
+  }
+
+  /**
+   * Desk update
+   */
+  export type DeskUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Desk
+     */
+    omit?: DeskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Desk.
+     */
+    data: XOR<DeskUpdateInput, DeskUncheckedUpdateInput>
+    /**
+     * Choose, which Desk to update.
+     */
+    where: DeskWhereUniqueInput
+  }
+
+  /**
+   * Desk updateMany
+   */
+  export type DeskUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Desks.
+     */
+    data: XOR<DeskUpdateManyMutationInput, DeskUncheckedUpdateManyInput>
+    /**
+     * Filter which Desks to update
+     */
+    where?: DeskWhereInput
+    /**
+     * Limit how many Desks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Desk updateManyAndReturn
+   */
+  export type DeskUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Desk
+     */
+    omit?: DeskOmit<ExtArgs> | null
+    /**
+     * The data used to update Desks.
+     */
+    data: XOR<DeskUpdateManyMutationInput, DeskUncheckedUpdateManyInput>
+    /**
+     * Filter which Desks to update
+     */
+    where?: DeskWhereInput
+    /**
+     * Limit how many Desks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Desk upsert
+   */
+  export type DeskUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Desk
+     */
+    omit?: DeskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Desk to update in case it exists.
+     */
+    where: DeskWhereUniqueInput
+    /**
+     * In case the Desk found by the `where` argument doesn't exist, create a new Desk with this data.
+     */
+    create: XOR<DeskCreateInput, DeskUncheckedCreateInput>
+    /**
+     * In case the Desk was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DeskUpdateInput, DeskUncheckedUpdateInput>
+  }
+
+  /**
+   * Desk delete
+   */
+  export type DeskDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Desk
+     */
+    omit?: DeskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+    /**
+     * Filter which Desk to delete.
+     */
+    where: DeskWhereUniqueInput
+  }
+
+  /**
+   * Desk deleteMany
+   */
+  export type DeskDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Desks to delete
+     */
+    where?: DeskWhereInput
+    /**
+     * Limit how many Desks to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Desk.opd
+   */
+  export type Desk$opdArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Opd
+     */
+    select?: OpdSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Opd
+     */
+    omit?: OpdOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OpdInclude<ExtArgs> | null
+    where?: OpdWhereInput
+    orderBy?: OpdOrderByWithRelationInput | OpdOrderByWithRelationInput[]
+    cursor?: OpdWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OpdScalarFieldEnum | OpdScalarFieldEnum[]
+  }
+
+  /**
+   * Desk without action
+   */
+  export type DeskDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Desk
+     */
+    omit?: DeskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
   }
 
 
@@ -12079,10 +13325,21 @@ export namespace Prisma {
     updatedAt: 'updatedAt',
     namaOpd: 'namaOpd',
     urusan: 'urusan',
-    kodeUrusan: 'kodeUrusan'
+    kodeUrusan: 'kodeUrusan',
+    deskId: 'deskId'
   };
 
   export type OpdScalarFieldEnum = (typeof OpdScalarFieldEnum)[keyof typeof OpdScalarFieldEnum]
+
+
+  export const DeskScalarFieldEnum: {
+    id: 'id',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    namaDesk: 'namaDesk'
+  };
+
+  export type DeskScalarFieldEnum = (typeof DeskScalarFieldEnum)[keyof typeof DeskScalarFieldEnum]
 
 
   export const KegiatanScalarFieldEnum: {
@@ -12344,7 +13601,9 @@ export namespace Prisma {
     namaOpd?: StringFilter<"Opd"> | string
     urusan?: StringFilter<"Opd"> | string
     kodeUrusan?: StringFilter<"Opd"> | string
+    deskId?: IntFilter<"Opd"> | number
     kegiatan?: KegiatanListRelationFilter
+    desk?: XOR<DeskScalarRelationFilter, DeskWhereInput>
   }
 
   export type OpdOrderByWithRelationInput = {
@@ -12354,7 +13613,9 @@ export namespace Prisma {
     namaOpd?: SortOrder
     urusan?: SortOrder
     kodeUrusan?: SortOrder
+    deskId?: SortOrder
     kegiatan?: KegiatanOrderByRelationAggregateInput
+    desk?: DeskOrderByWithRelationInput
   }
 
   export type OpdWhereUniqueInput = Prisma.AtLeast<{
@@ -12367,7 +13628,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Opd"> | Date | string
     namaOpd?: StringFilter<"Opd"> | string
     urusan?: StringFilter<"Opd"> | string
+    deskId?: IntFilter<"Opd"> | number
     kegiatan?: KegiatanListRelationFilter
+    desk?: XOR<DeskScalarRelationFilter, DeskWhereInput>
   }, "id" | "kodeUrusan">
 
   export type OpdOrderByWithAggregationInput = {
@@ -12377,6 +13640,7 @@ export namespace Prisma {
     namaOpd?: SortOrder
     urusan?: SortOrder
     kodeUrusan?: SortOrder
+    deskId?: SortOrder
     _count?: OpdCountOrderByAggregateInput
     _avg?: OpdAvgOrderByAggregateInput
     _max?: OpdMaxOrderByAggregateInput
@@ -12394,6 +13658,59 @@ export namespace Prisma {
     namaOpd?: StringWithAggregatesFilter<"Opd"> | string
     urusan?: StringWithAggregatesFilter<"Opd"> | string
     kodeUrusan?: StringWithAggregatesFilter<"Opd"> | string
+    deskId?: IntWithAggregatesFilter<"Opd"> | number
+  }
+
+  export type DeskWhereInput = {
+    AND?: DeskWhereInput | DeskWhereInput[]
+    OR?: DeskWhereInput[]
+    NOT?: DeskWhereInput | DeskWhereInput[]
+    id?: IntFilter<"Desk"> | number
+    createdAt?: DateTimeFilter<"Desk"> | Date | string
+    updatedAt?: DateTimeFilter<"Desk"> | Date | string
+    namaDesk?: StringFilter<"Desk"> | string
+    opd?: OpdListRelationFilter
+  }
+
+  export type DeskOrderByWithRelationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    namaDesk?: SortOrder
+    opd?: OpdOrderByRelationAggregateInput
+  }
+
+  export type DeskWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: DeskWhereInput | DeskWhereInput[]
+    OR?: DeskWhereInput[]
+    NOT?: DeskWhereInput | DeskWhereInput[]
+    createdAt?: DateTimeFilter<"Desk"> | Date | string
+    updatedAt?: DateTimeFilter<"Desk"> | Date | string
+    namaDesk?: StringFilter<"Desk"> | string
+    opd?: OpdListRelationFilter
+  }, "id">
+
+  export type DeskOrderByWithAggregationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    namaDesk?: SortOrder
+    _count?: DeskCountOrderByAggregateInput
+    _avg?: DeskAvgOrderByAggregateInput
+    _max?: DeskMaxOrderByAggregateInput
+    _min?: DeskMinOrderByAggregateInput
+    _sum?: DeskSumOrderByAggregateInput
+  }
+
+  export type DeskScalarWhereWithAggregatesInput = {
+    AND?: DeskScalarWhereWithAggregatesInput | DeskScalarWhereWithAggregatesInput[]
+    OR?: DeskScalarWhereWithAggregatesInput[]
+    NOT?: DeskScalarWhereWithAggregatesInput | DeskScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Desk"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"Desk"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Desk"> | Date | string
+    namaDesk?: StringWithAggregatesFilter<"Desk"> | string
   }
 
   export type KegiatanWhereInput = {
@@ -12911,6 +14228,7 @@ export namespace Prisma {
     urusan: string
     kodeUrusan: string
     kegiatan?: KegiatanCreateNestedManyWithoutOpdInput
+    desk: DeskCreateNestedOneWithoutOpdInput
   }
 
   export type OpdUncheckedCreateInput = {
@@ -12920,6 +14238,7 @@ export namespace Prisma {
     namaOpd: string
     urusan: string
     kodeUrusan: string
+    deskId: number
     kegiatan?: KegiatanUncheckedCreateNestedManyWithoutOpdInput
   }
 
@@ -12930,6 +14249,7 @@ export namespace Prisma {
     urusan?: StringFieldUpdateOperationsInput | string
     kodeUrusan?: StringFieldUpdateOperationsInput | string
     kegiatan?: KegiatanUpdateManyWithoutOpdNestedInput
+    desk?: DeskUpdateOneRequiredWithoutOpdNestedInput
   }
 
   export type OpdUncheckedUpdateInput = {
@@ -12939,6 +14259,7 @@ export namespace Prisma {
     namaOpd?: StringFieldUpdateOperationsInput | string
     urusan?: StringFieldUpdateOperationsInput | string
     kodeUrusan?: StringFieldUpdateOperationsInput | string
+    deskId?: IntFieldUpdateOperationsInput | number
     kegiatan?: KegiatanUncheckedUpdateManyWithoutOpdNestedInput
   }
 
@@ -12949,6 +14270,7 @@ export namespace Prisma {
     namaOpd: string
     urusan: string
     kodeUrusan: string
+    deskId: number
   }
 
   export type OpdUpdateManyMutationInput = {
@@ -12966,6 +14288,57 @@ export namespace Prisma {
     namaOpd?: StringFieldUpdateOperationsInput | string
     urusan?: StringFieldUpdateOperationsInput | string
     kodeUrusan?: StringFieldUpdateOperationsInput | string
+    deskId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type DeskCreateInput = {
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    namaDesk: string
+    opd?: OpdCreateNestedManyWithoutDeskInput
+  }
+
+  export type DeskUncheckedCreateInput = {
+    id?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    namaDesk: string
+    opd?: OpdUncheckedCreateNestedManyWithoutDeskInput
+  }
+
+  export type DeskUpdateInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    namaDesk?: StringFieldUpdateOperationsInput | string
+    opd?: OpdUpdateManyWithoutDeskNestedInput
+  }
+
+  export type DeskUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    namaDesk?: StringFieldUpdateOperationsInput | string
+    opd?: OpdUncheckedUpdateManyWithoutDeskNestedInput
+  }
+
+  export type DeskCreateManyInput = {
+    id?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    namaDesk: string
+  }
+
+  export type DeskUpdateManyMutationInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    namaDesk?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type DeskUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    namaDesk?: StringFieldUpdateOperationsInput | string
   }
 
   export type KegiatanCreateInput = {
@@ -13552,6 +14925,11 @@ export namespace Prisma {
     none?: KegiatanWhereInput
   }
 
+  export type DeskScalarRelationFilter = {
+    is?: DeskWhereInput
+    isNot?: DeskWhereInput
+  }
+
   export type KegiatanOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -13563,10 +14941,12 @@ export namespace Prisma {
     namaOpd?: SortOrder
     urusan?: SortOrder
     kodeUrusan?: SortOrder
+    deskId?: SortOrder
   }
 
   export type OpdAvgOrderByAggregateInput = {
     id?: SortOrder
+    deskId?: SortOrder
   }
 
   export type OpdMaxOrderByAggregateInput = {
@@ -13576,6 +14956,7 @@ export namespace Prisma {
     namaOpd?: SortOrder
     urusan?: SortOrder
     kodeUrusan?: SortOrder
+    deskId?: SortOrder
   }
 
   export type OpdMinOrderByAggregateInput = {
@@ -13585,9 +14966,50 @@ export namespace Prisma {
     namaOpd?: SortOrder
     urusan?: SortOrder
     kodeUrusan?: SortOrder
+    deskId?: SortOrder
   }
 
   export type OpdSumOrderByAggregateInput = {
+    id?: SortOrder
+    deskId?: SortOrder
+  }
+
+  export type OpdListRelationFilter = {
+    every?: OpdWhereInput
+    some?: OpdWhereInput
+    none?: OpdWhereInput
+  }
+
+  export type OpdOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DeskCountOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    namaDesk?: SortOrder
+  }
+
+  export type DeskAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type DeskMaxOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    namaDesk?: SortOrder
+  }
+
+  export type DeskMinOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    namaDesk?: SortOrder
+  }
+
+  export type DeskSumOrderByAggregateInput = {
     id?: SortOrder
   }
 
@@ -14023,6 +15445,12 @@ export namespace Prisma {
     connect?: KegiatanWhereUniqueInput | KegiatanWhereUniqueInput[]
   }
 
+  export type DeskCreateNestedOneWithoutOpdInput = {
+    create?: XOR<DeskCreateWithoutOpdInput, DeskUncheckedCreateWithoutOpdInput>
+    connectOrCreate?: DeskCreateOrConnectWithoutOpdInput
+    connect?: DeskWhereUniqueInput
+  }
+
   export type KegiatanUncheckedCreateNestedManyWithoutOpdInput = {
     create?: XOR<KegiatanCreateWithoutOpdInput, KegiatanUncheckedCreateWithoutOpdInput> | KegiatanCreateWithoutOpdInput[] | KegiatanUncheckedCreateWithoutOpdInput[]
     connectOrCreate?: KegiatanCreateOrConnectWithoutOpdInput | KegiatanCreateOrConnectWithoutOpdInput[]
@@ -14044,6 +15472,14 @@ export namespace Prisma {
     deleteMany?: KegiatanScalarWhereInput | KegiatanScalarWhereInput[]
   }
 
+  export type DeskUpdateOneRequiredWithoutOpdNestedInput = {
+    create?: XOR<DeskCreateWithoutOpdInput, DeskUncheckedCreateWithoutOpdInput>
+    connectOrCreate?: DeskCreateOrConnectWithoutOpdInput
+    upsert?: DeskUpsertWithoutOpdInput
+    connect?: DeskWhereUniqueInput
+    update?: XOR<XOR<DeskUpdateToOneWithWhereWithoutOpdInput, DeskUpdateWithoutOpdInput>, DeskUncheckedUpdateWithoutOpdInput>
+  }
+
   export type KegiatanUncheckedUpdateManyWithoutOpdNestedInput = {
     create?: XOR<KegiatanCreateWithoutOpdInput, KegiatanUncheckedCreateWithoutOpdInput> | KegiatanCreateWithoutOpdInput[] | KegiatanUncheckedCreateWithoutOpdInput[]
     connectOrCreate?: KegiatanCreateOrConnectWithoutOpdInput | KegiatanCreateOrConnectWithoutOpdInput[]
@@ -14056,6 +15492,48 @@ export namespace Prisma {
     update?: KegiatanUpdateWithWhereUniqueWithoutOpdInput | KegiatanUpdateWithWhereUniqueWithoutOpdInput[]
     updateMany?: KegiatanUpdateManyWithWhereWithoutOpdInput | KegiatanUpdateManyWithWhereWithoutOpdInput[]
     deleteMany?: KegiatanScalarWhereInput | KegiatanScalarWhereInput[]
+  }
+
+  export type OpdCreateNestedManyWithoutDeskInput = {
+    create?: XOR<OpdCreateWithoutDeskInput, OpdUncheckedCreateWithoutDeskInput> | OpdCreateWithoutDeskInput[] | OpdUncheckedCreateWithoutDeskInput[]
+    connectOrCreate?: OpdCreateOrConnectWithoutDeskInput | OpdCreateOrConnectWithoutDeskInput[]
+    createMany?: OpdCreateManyDeskInputEnvelope
+    connect?: OpdWhereUniqueInput | OpdWhereUniqueInput[]
+  }
+
+  export type OpdUncheckedCreateNestedManyWithoutDeskInput = {
+    create?: XOR<OpdCreateWithoutDeskInput, OpdUncheckedCreateWithoutDeskInput> | OpdCreateWithoutDeskInput[] | OpdUncheckedCreateWithoutDeskInput[]
+    connectOrCreate?: OpdCreateOrConnectWithoutDeskInput | OpdCreateOrConnectWithoutDeskInput[]
+    createMany?: OpdCreateManyDeskInputEnvelope
+    connect?: OpdWhereUniqueInput | OpdWhereUniqueInput[]
+  }
+
+  export type OpdUpdateManyWithoutDeskNestedInput = {
+    create?: XOR<OpdCreateWithoutDeskInput, OpdUncheckedCreateWithoutDeskInput> | OpdCreateWithoutDeskInput[] | OpdUncheckedCreateWithoutDeskInput[]
+    connectOrCreate?: OpdCreateOrConnectWithoutDeskInput | OpdCreateOrConnectWithoutDeskInput[]
+    upsert?: OpdUpsertWithWhereUniqueWithoutDeskInput | OpdUpsertWithWhereUniqueWithoutDeskInput[]
+    createMany?: OpdCreateManyDeskInputEnvelope
+    set?: OpdWhereUniqueInput | OpdWhereUniqueInput[]
+    disconnect?: OpdWhereUniqueInput | OpdWhereUniqueInput[]
+    delete?: OpdWhereUniqueInput | OpdWhereUniqueInput[]
+    connect?: OpdWhereUniqueInput | OpdWhereUniqueInput[]
+    update?: OpdUpdateWithWhereUniqueWithoutDeskInput | OpdUpdateWithWhereUniqueWithoutDeskInput[]
+    updateMany?: OpdUpdateManyWithWhereWithoutDeskInput | OpdUpdateManyWithWhereWithoutDeskInput[]
+    deleteMany?: OpdScalarWhereInput | OpdScalarWhereInput[]
+  }
+
+  export type OpdUncheckedUpdateManyWithoutDeskNestedInput = {
+    create?: XOR<OpdCreateWithoutDeskInput, OpdUncheckedCreateWithoutDeskInput> | OpdCreateWithoutDeskInput[] | OpdUncheckedCreateWithoutDeskInput[]
+    connectOrCreate?: OpdCreateOrConnectWithoutDeskInput | OpdCreateOrConnectWithoutDeskInput[]
+    upsert?: OpdUpsertWithWhereUniqueWithoutDeskInput | OpdUpsertWithWhereUniqueWithoutDeskInput[]
+    createMany?: OpdCreateManyDeskInputEnvelope
+    set?: OpdWhereUniqueInput | OpdWhereUniqueInput[]
+    disconnect?: OpdWhereUniqueInput | OpdWhereUniqueInput[]
+    delete?: OpdWhereUniqueInput | OpdWhereUniqueInput[]
+    connect?: OpdWhereUniqueInput | OpdWhereUniqueInput[]
+    update?: OpdUpdateWithWhereUniqueWithoutDeskInput | OpdUpdateWithWhereUniqueWithoutDeskInput[]
+    updateMany?: OpdUpdateManyWithWhereWithoutDeskInput | OpdUpdateManyWithWhereWithoutDeskInput[]
+    deleteMany?: OpdScalarWhereInput | OpdScalarWhereInput[]
   }
 
   export type OpdCreateNestedOneWithoutKegiatanInput = {
@@ -14778,6 +16256,24 @@ export namespace Prisma {
     data: KegiatanCreateManyOpdInput | KegiatanCreateManyOpdInput[]
   }
 
+  export type DeskCreateWithoutOpdInput = {
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    namaDesk: string
+  }
+
+  export type DeskUncheckedCreateWithoutOpdInput = {
+    id?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    namaDesk: string
+  }
+
+  export type DeskCreateOrConnectWithoutOpdInput = {
+    where: DeskWhereUniqueInput
+    create: XOR<DeskCreateWithoutOpdInput, DeskUncheckedCreateWithoutOpdInput>
+  }
+
   export type KegiatanUpsertWithWhereUniqueWithoutOpdInput = {
     where: KegiatanWhereUniqueInput
     update: XOR<KegiatanUpdateWithoutOpdInput, KegiatanUncheckedUpdateWithoutOpdInput>
@@ -14806,12 +16302,94 @@ export namespace Prisma {
     opdId?: IntFilter<"Kegiatan"> | number
   }
 
+  export type DeskUpsertWithoutOpdInput = {
+    update: XOR<DeskUpdateWithoutOpdInput, DeskUncheckedUpdateWithoutOpdInput>
+    create: XOR<DeskCreateWithoutOpdInput, DeskUncheckedCreateWithoutOpdInput>
+    where?: DeskWhereInput
+  }
+
+  export type DeskUpdateToOneWithWhereWithoutOpdInput = {
+    where?: DeskWhereInput
+    data: XOR<DeskUpdateWithoutOpdInput, DeskUncheckedUpdateWithoutOpdInput>
+  }
+
+  export type DeskUpdateWithoutOpdInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    namaDesk?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type DeskUncheckedUpdateWithoutOpdInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    namaDesk?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type OpdCreateWithoutDeskInput = {
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    namaOpd: string
+    urusan: string
+    kodeUrusan: string
+    kegiatan?: KegiatanCreateNestedManyWithoutOpdInput
+  }
+
+  export type OpdUncheckedCreateWithoutDeskInput = {
+    id?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    namaOpd: string
+    urusan: string
+    kodeUrusan: string
+    kegiatan?: KegiatanUncheckedCreateNestedManyWithoutOpdInput
+  }
+
+  export type OpdCreateOrConnectWithoutDeskInput = {
+    where: OpdWhereUniqueInput
+    create: XOR<OpdCreateWithoutDeskInput, OpdUncheckedCreateWithoutDeskInput>
+  }
+
+  export type OpdCreateManyDeskInputEnvelope = {
+    data: OpdCreateManyDeskInput | OpdCreateManyDeskInput[]
+  }
+
+  export type OpdUpsertWithWhereUniqueWithoutDeskInput = {
+    where: OpdWhereUniqueInput
+    update: XOR<OpdUpdateWithoutDeskInput, OpdUncheckedUpdateWithoutDeskInput>
+    create: XOR<OpdCreateWithoutDeskInput, OpdUncheckedCreateWithoutDeskInput>
+  }
+
+  export type OpdUpdateWithWhereUniqueWithoutDeskInput = {
+    where: OpdWhereUniqueInput
+    data: XOR<OpdUpdateWithoutDeskInput, OpdUncheckedUpdateWithoutDeskInput>
+  }
+
+  export type OpdUpdateManyWithWhereWithoutDeskInput = {
+    where: OpdScalarWhereInput
+    data: XOR<OpdUpdateManyMutationInput, OpdUncheckedUpdateManyWithoutDeskInput>
+  }
+
+  export type OpdScalarWhereInput = {
+    AND?: OpdScalarWhereInput | OpdScalarWhereInput[]
+    OR?: OpdScalarWhereInput[]
+    NOT?: OpdScalarWhereInput | OpdScalarWhereInput[]
+    id?: IntFilter<"Opd"> | number
+    createdAt?: DateTimeFilter<"Opd"> | Date | string
+    updatedAt?: DateTimeFilter<"Opd"> | Date | string
+    namaOpd?: StringFilter<"Opd"> | string
+    urusan?: StringFilter<"Opd"> | string
+    kodeUrusan?: StringFilter<"Opd"> | string
+    deskId?: IntFilter<"Opd"> | number
+  }
+
   export type OpdCreateWithoutKegiatanInput = {
     createdAt?: Date | string
     updatedAt?: Date | string
     namaOpd: string
     urusan: string
     kodeUrusan: string
+    desk: DeskCreateNestedOneWithoutOpdInput
   }
 
   export type OpdUncheckedCreateWithoutKegiatanInput = {
@@ -14821,6 +16399,7 @@ export namespace Prisma {
     namaOpd: string
     urusan: string
     kodeUrusan: string
+    deskId: number
   }
 
   export type OpdCreateOrConnectWithoutKegiatanInput = {
@@ -14871,6 +16450,7 @@ export namespace Prisma {
     namaOpd?: StringFieldUpdateOperationsInput | string
     urusan?: StringFieldUpdateOperationsInput | string
     kodeUrusan?: StringFieldUpdateOperationsInput | string
+    desk?: DeskUpdateOneRequiredWithoutOpdNestedInput
   }
 
   export type OpdUncheckedUpdateWithoutKegiatanInput = {
@@ -14880,6 +16460,7 @@ export namespace Prisma {
     namaOpd?: StringFieldUpdateOperationsInput | string
     urusan?: StringFieldUpdateOperationsInput | string
     kodeUrusan?: StringFieldUpdateOperationsInput | string
+    deskId?: IntFieldUpdateOperationsInput | number
   }
 
   export type SubKegiatanUpsertWithWhereUniqueWithoutKegiatanInput = {
@@ -15589,6 +17170,43 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     namaKegiatan?: StringFieldUpdateOperationsInput | string
     kodeKegiatan?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type OpdCreateManyDeskInput = {
+    id?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    namaOpd: string
+    urusan: string
+    kodeUrusan: string
+  }
+
+  export type OpdUpdateWithoutDeskInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    namaOpd?: StringFieldUpdateOperationsInput | string
+    urusan?: StringFieldUpdateOperationsInput | string
+    kodeUrusan?: StringFieldUpdateOperationsInput | string
+    kegiatan?: KegiatanUpdateManyWithoutOpdNestedInput
+  }
+
+  export type OpdUncheckedUpdateWithoutDeskInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    namaOpd?: StringFieldUpdateOperationsInput | string
+    urusan?: StringFieldUpdateOperationsInput | string
+    kodeUrusan?: StringFieldUpdateOperationsInput | string
+    kegiatan?: KegiatanUncheckedUpdateManyWithoutOpdNestedInput
+  }
+
+  export type OpdUncheckedUpdateManyWithoutDeskInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    namaOpd?: StringFieldUpdateOperationsInput | string
+    urusan?: StringFieldUpdateOperationsInput | string
+    kodeUrusan?: StringFieldUpdateOperationsInput | string
   }
 
   export type SubKegiatanCreateManyKegiatanInput = {
